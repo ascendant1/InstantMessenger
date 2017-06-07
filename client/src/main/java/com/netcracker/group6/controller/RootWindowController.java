@@ -14,7 +14,6 @@ public class RootWindowController   {
         alert.setTitle("Instant Messenger");
         alert.setHeaderText("About");
         alert.setContentText("Authors: \n2017");
-
         alert.showAndWait();
     }
 

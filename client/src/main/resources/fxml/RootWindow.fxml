@@ -12,7 +12,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                        <MenuItem mnemonicParsing="false" text="Connect" />
+                  <MenuItem mnemonicParsing="false" text="Registration" />
+                  <MenuItem mnemonicParsing="false" text="Login" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                     </items></Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
@@ -21,8 +24,4 @@
             </menus>
         </MenuBar>
     </top>
-    <stylesheets>
-        <URL value="@/css/DarkTheme.css" />
-        <URL value="@../css/DarkTheme.css" />
-    </stylesheets>
 </BorderPane>

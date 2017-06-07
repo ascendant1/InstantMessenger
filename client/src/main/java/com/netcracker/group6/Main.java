@@ -1,11 +1,14 @@
 package com.netcracker.group6;
 
 
+import com.netcracker.group6.controller.ConnectWindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
@@ -29,6 +32,7 @@ public class Main extends Application {
         this.primaryStage.setTitle("Instant Messenger");
 
         initRootWindow();
+        initConnectWindow();
 
 //        this.primaryStage.getIcons().add(new Image("/images/icon.png"));
 
@@ -51,4 +55,30 @@ public class Main extends Application {
             LOGGER.error("RootWindow data access error");
         }
     }
+
+    public boolean initConnectWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/ConnectWindow.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Connecting");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            ConnectWindowController connectWindowController = loader.getController();
+            connectWindowController.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            dialogStage.setAlwaysOnTop(true);
+            return connectWindowController.isOkClicked();
+
+        } catch (IOException e) {
+            LOGGER.error("ConnectWindow data access error");
+            return false;
+        }
+    }
+
 }
