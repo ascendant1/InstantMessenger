@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -12,9 +11,9 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Connect" />
-                  <MenuItem mnemonicParsing="false" text="Registration" />
-                  <MenuItem mnemonicParsing="false" text="Login" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleConnect" text="Connect" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleReg" text="Registration" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleLogin" text="Login" />
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                     </items></Menu>
                 <Menu mnemonicParsing="false" text="Help">

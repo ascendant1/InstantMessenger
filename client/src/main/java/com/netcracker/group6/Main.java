@@ -2,6 +2,8 @@ package com.netcracker.group6;
 
 
 import com.netcracker.group6.controller.ConnectWindowController;
+import com.netcracker.group6.controller.LoginWindowController;
+import com.netcracker.group6.controller.RegWindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,7 +22,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(Main.class);
-    private Stage primaryStage;
+    private static Stage primaryStage;
     private BorderPane rootLayout;
 
     public static void main(String[] args) {
@@ -28,8 +30,8 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Instant Messenger");
+        Main.primaryStage = primaryStage;
+        Main.primaryStage.setTitle("Instant Messenger");
 
         initRootWindow();
         initConnectWindow();
@@ -47,7 +49,9 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/RootWindow.fxml"));
             rootLayout = (BorderPane) loader.load();
+
             Scene scene = new Scene(rootLayout);
+
             primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -72,11 +76,60 @@ public class Main extends Application {
             ConnectWindowController connectWindowController = loader.getController();
             connectWindowController.setDialogStage(dialogStage);
             dialogStage.showAndWait();
-            dialogStage.setAlwaysOnTop(true);
+
+
             return connectWindowController.isOkClicked();
 
         } catch (IOException e) {
             LOGGER.error("ConnectWindow data access error");
+            return false;
+        }
+    }
+
+    public boolean initRegWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/RegWindow.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Registration");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            RegWindowController regWindowController = loader.getController();
+            regWindowController.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return regWindowController.isOkClicked();
+
+        } catch (IOException e) {
+            LOGGER.error("RegWindow data access error");
+            return false;
+        }
+    }
+
+    public boolean initLoginWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/LoginWindow.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Authorization");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            LoginWindowController loginWindowController = loader.getController();
+            loginWindowController.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return loginWindowController.isOkClicked();
+
+        } catch (IOException e) {
+            LOGGER.error("LoginWindow data access error");
             return false;
         }
     }
